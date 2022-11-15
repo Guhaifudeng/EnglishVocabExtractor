@@ -19,6 +19,13 @@ from pdf_extract.word_utils import get_valid_words_in_freq_dist
 
 
 def get_chapter_freq(chapter, start_page, end_page):
+    """
+    按页数获取章节内容
+    :param chapter:
+    :param start_page:
+    :param end_page:
+    :return:
+    """
     full_tokens = []
     page_range = list(range(start_page, end_page, 1))
     with pdfplumber.open('data/RL4NLP_2022.pdf', pages=page_range) as pdf:
@@ -32,6 +39,11 @@ def get_chapter_freq(chapter, start_page, end_page):
 
 
 def get_all_chapter_freq(chapter_page_indexes):
+    """
+    获取所有章节的词统计信息
+    :param chapter_page_indexes:
+    :return:
+    """
     ret = []
     for index in range(len(chapter_page_indexes) - 1):
         now_chapter_start = chapter_page_indexes[index][1]
@@ -45,7 +57,7 @@ def get_all_chapter_freq(chapter_page_indexes):
 
 
 if __name__ == '__main__':
-    # 配置数据
+    # 配置数据(章节名称及开始页数列表)
     chapter_page_indexes = [
         ('preface', 1),
         ('content', 13),
@@ -61,7 +73,7 @@ if __name__ == '__main__':
         ('9-Cross-Modal Representation', 301),
         ('10-Resources', 337),
         ('11-Outlook', 347),
-        ('end', 352)
+        ('end', 352) # end是必须的，为最后一章的结束页
     ]
     print(chapter_page_indexes)
     all_chapter_freq_dist = get_all_chapter_freq(chapter_page_indexes)

@@ -24,6 +24,11 @@ def get_chapter_freq(paper_name, paper_path):
 
 
 def get_all_pdf_files(paper_dir):
+    """
+    获取当前目录下所有文件(特殊:当前目录为pdf文件名，直接返回)
+    :param paper_dir:
+    :return:
+    """
     if paper_dir.endswith(".pdf"):
         yield paper_dir
     else:
@@ -43,8 +48,6 @@ def get_all_paper_freq(paper_dir):
         paper_name,page_freq = get_chapter_freq(os.path.split(pdf_file_path)[-1],pdf_file_path)
         ret.append((paper_name, page_freq))
     return ret
-
-
 
 
 
